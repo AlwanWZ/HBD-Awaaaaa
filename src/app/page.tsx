@@ -503,10 +503,16 @@ const getParallaxStyle = (depth = 1) => {
                     style={{ animationDelay: `${i * 0.2}s` }}
                   >
                     <div className="absolute inset-0 bg-gradient-to-br from-pink-500/20 to-blue-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"></div>
-                    <img 
-                      src={`/${i + 1}.jpg`} 
-                      alt="Memory" 
+                   <img
+                      src={`/${i + 1}.jpg`}
+                      alt="Memory"
                       className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
+                      onError={e => {
+                        const target = e.currentTarget;
+                        if (!target.src.endsWith('.JPG')) {
+                          target.src = `/${i + 1}.JPG`;
+                        }
+                      }}
                     />
                     <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
                       <span className="text-white font-light tracking-wider text-sm">
